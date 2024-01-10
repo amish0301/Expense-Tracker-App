@@ -1,15 +1,17 @@
-import React from "react";
-import { FaRupeeSign } from "react-icons/fa";
+import React, { useContext } from "react";
+import { GlobalContext } from "../Context Api/GlobalState";
+import Transaction from "./Transaction";
 
 function TransactionList() {
+  const { transactions } = useContext(GlobalContext);
+
   return (
     <div>
       <h3>History</h3>
-      <ul id="list" className="list">
-        <li className="minus">
-          Cash <span>-{<FaRupeeSign />}400</span>
-          <button className="delete-btn">x</button>
-        </li>
+      <ul className="list">
+        {transactions.map((transaction) => (
+          <Transaction key={transaction.id} transaction={transaction} />
+        ))}
       </ul>
     </div>
   );
